@@ -12,7 +12,7 @@ int main()
     std::vector<Point2D> points;
     std::set<Point2D> points_set;
     std::vector<Neighbours> neighbours_vector;
-    std::ifstream in("../points.txt");
+    std::ifstream in("./Data/points.txt");
     while(!in.eof())
     {
         n++;
@@ -38,12 +38,12 @@ int main()
 
     Clasterisation clasterisation(points_set, map);
     size_t i = 0;
-    std::ofstream outCount("../Data/count.txt");
+    std::ofstream outCount("./Data/count.txt");
     outCount << clasterisation.getNumberOfClaster();
     outCount.close();
     for (auto& claster : clasterisation.getClasters())
     {
-        std::ofstream outClaster("../Data/claster_" + std::to_string(i) + ".txt");
+        std::ofstream outClaster("./Data/claster_" + std::to_string(i) + ".txt");
         for (auto& point : claster)
         {
             double x = point.x();
@@ -52,7 +52,7 @@ int main()
             outClaster << y << "\t";
         }
         outClaster.close();
-        std::ofstream out("../Data/clasterBoundaries_" + std::to_string(i) + ".txt");
+        std::ofstream out("./Data/clasterBoundaries_" + std::to_string(i) + ".txt");
         std::vector<Boundary> boundaries;
         getClasterBoundary(claster, map, boundaries);
         out << boundaries.size() << "\n";
@@ -68,11 +68,9 @@ int main()
             }
             out.write("\n", 1);
         }
-        std::cout<< "done";
         i++;
         out.close();
     }
-    std:: cout<< "done";
 
-    return 0;
+    return clasterisation.getNumberOfClaster();
 }
