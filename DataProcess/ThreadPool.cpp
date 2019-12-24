@@ -23,7 +23,6 @@ ThreadPool::~ThreadPool ()
         condVar_.notify_all();
     }
     // Wait for all threads to stop
-    std::cerr << "Joining threads" << std::endl;
     for (auto& thread : threads_)
         thread.join();
 }
@@ -56,11 +55,9 @@ void ThreadPool::threadEntry (int i)
             if (jobs_.empty ())
             {
 // No jobs to do and we are shutting down
-                std::cerr << "Thread " << i << " terminates" << std::endl;
                 return;
             }
 
-            std::cerr << "Thread " << i << " does a job" << std::endl;
             job = std::move (jobs_.front ());
             jobs_.pop();
         }
