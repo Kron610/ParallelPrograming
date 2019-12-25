@@ -93,12 +93,11 @@ int main()
 			i++;
 			out.close();
 		}
-		return -2;
+		return 0;
 	}
 	catch (std::exception exc)
 	{
 		std::cout << exc.what();
-		return -1;
 	}
 	return 0;
 }
